@@ -1,0 +1,28 @@
+[project]
+name = "small_cap_rvol_breakout"
+version = "0.1.0"
+description = "CrewAI example: small-cap high-RVOL opening-range breakout screener"
+authors = [{ name = "CrewAI Example", email = "example@crewai.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.0.0",
+]
+
+[project.scripts]
+small_cap_rvol_breakout = "small_cap_rvol_breakout.main:run"
+run_crew = "small_cap_rvol_breakout.main:run"
+run_screen = "small_cap_rvol_breakout.main:run_screen"
+train = "small_cap_rvol_breakout.main:train"
+replay = "small_cap_rvol_breakout.main:replay"
+test = "small_cap_rvol_breakout.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

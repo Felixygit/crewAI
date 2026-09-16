@@ -9,6 +9,7 @@ dependencies = [
     "yfinance>=0.2.40",
     "pandas>=2.0.0",
     "numpy>=1.26.0",
+    "alpaca-py>=0.30.0",
 ]
 
 [project.scripts]
@@ -16,6 +17,7 @@ small_cap_rvol_breakout = "small_cap_rvol_breakout.main:run"
 run_crew = "small_cap_rvol_breakout.main:run"
 run_screen = "small_cap_rvol_breakout.main:run_screen"
 run_backtest = "small_cap_rvol_breakout.run_backtest:main"
+run_alpaca_paper = "small_cap_rvol_breakout.run_alpaca_paper:main"
 train = "small_cap_rvol_breakout.main:train"
 replay = "small_cap_rvol_breakout.main:replay"
 test = "small_cap_rvol_breakout.main:test"

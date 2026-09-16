@@ -82,6 +82,43 @@ Agents:
 - **breakout_strategist** — runs `rvol_breakout_trade_plan` per ticker
 - **risk_officer** — writes the final brief to `output/morning_brief.md`
 
+## Alpaca paper trading
+
+This example can execute the strategy on an **Alpaca paper** account only
+(`ALPACA_PAPER=true` is enforced).
+
+1. Create a paper API key at [app.alpaca.markets](https://app.alpaca.markets)
+2. Copy `.env.example` → `.env` and set:
+
+```bash
+ALPACA_API_KEY=...
+ALPACA_API_SECRET=...
+ALPACA_PAPER=true
+ALPACA_DATA_FEED=iex
+```
+
+3. Dry-run first (no orders):
+
+```bash
+uv run run_alpaca_paper --dry-run --once
+```
+
+4. Live paper loop during market hours:
+
+```bash
+uv run run_alpaca_paper --once          # single cycle
+uv run run_alpaca_paper                 # poll forever (Ctrl+C to stop)
+```
+
+### What the paper bot does
+1. Waits until the opening range (`ALPACA_OR_MINUTES`, default 5) is complete
+2. Screens the universe for price / RVOL / ATR% / dollar-volume / spread
+3. On OR-high break with last ≥ VWAP, sizes shares from account equity × risk %
+4. Submits **two DAY bracket orders** (T1 scale-out + T2 runner), each with the same stop
+5. Skips symbols that already have an open position or were traded earlier in the session
+
+**Safety:** the runner refuses to start if `ALPACA_PAPER=false`. Extended-hours trading is off. This is not financial advice.
+
 ## Backtest (last ~1 year)
 
 Hourly Yahoo bars are used as a proxy for the opening range (first regular-session hour = OR). RVOL is measured from session volume so far vs expected volume (no full-day look-ahead).

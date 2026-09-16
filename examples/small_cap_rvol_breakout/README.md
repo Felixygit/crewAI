@@ -82,6 +82,30 @@ Agents:
 - **breakout_strategist** — runs `rvol_breakout_trade_plan` per ticker
 - **risk_officer** — writes the final brief to `output/morning_brief.md`
 
+## Backtest (last ~1 year)
+
+Hourly Yahoo bars are used as a proxy for the opening range (first regular-session hour = OR). RVOL is measured from session volume so far vs expected volume (no full-day look-ahead).
+
+```bash
+uv run run_backtest
+# writes output/backtest_1y_report.md and output/backtest_1y_trades.json
+```
+
+### Latest run snapshot (2025-09-16 → 2026-09-16)
+
+| Metric | Value |
+|--------|-------|
+| Symbols tested | 83 |
+| Trades | 348 (~6.7/week, max 3/day) |
+| Starting equity | $25,000 |
+| Total P&L | **+$25,755 (+103%)** |
+| Win rate | 56.9% |
+| Profit factor | 2.14 |
+| Avg R | 0.59 |
+| Max drawdown | -2.66% |
+
+**Caveats (read these):** educational simulation only; survivorship bias in the ticker list; 1-hour OR is easier than a true 5-minute OR; 0.05% slippage and $0 commissions; no borrow/halt/spread model; fixed $25k risk sizing (does not compound). Live results will differ.
+
 ## Wiring live data
 
 Replace `SAMPLE_QUOTES` (or pass a custom `quotes=` list into the tools) with snapshots from your broker / market-data vendor. Each `QuoteSnapshot` needs:

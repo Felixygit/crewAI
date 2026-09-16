@@ -252,6 +252,14 @@ class AlpacaMarketData:
             return None, None
 
     def snapshot(self, symbol: str) -> QuoteSnapshot | None:
+        # Offline dry-run demo when credentials are not configured.
+        if self.config.dry_run and (not self.config.api_key or not self.config.api_secret):
+            from small_cap_rvol_breakout.sample_data import SAMPLE_QUOTES
+
+            return next(
+                (q for q in SAMPLE_QUOTES if q.symbol.upper() == symbol.upper()),
+                None,
+            )
         try:
             minutes = self.get_minute_bars(symbol)
             daily = self.get_daily_bars(symbol)

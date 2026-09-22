@@ -1,0 +1,31 @@
+regime_task:
+  description: >
+    Call ema_vwap_stack_plan for ticker={ticker}. Capture clock, regime,
+    stack ordering, and the one-sentence reason. If the tool refuses missing
+    inputs, stop and list the missing fields — do not invent values.
+  expected_output: >
+    A short markdown note with ticker, as_of, clock, regime, and whether
+    the stack is ordered.
+  agent: regime_analyst
+
+setup_task:
+  description: >
+    Using the same ema_vwap_stack_plan output for ticker={ticker}, record
+    confluence_score, confluence_hits, fvg assessment, and the chosen setup
+    (pullback | reclaim | fade | none). Do not invent confluence hits.
+  expected_output: >
+    Markdown listing confluence score/hits, FVG overlap, and setup.
+  agent: stack_strategist
+
+plan_task:
+  description: >
+    Emit the final structured plan object for ticker={ticker} from the tool
+    JSON. Include every plan field (side, instrument, entry_zone,
+    invalidation, targets, r_dollars, size_rule, time_stop, kill_switch) or
+    stand-aside. Reminder: educational research only — not financial advice
+    and not an order. No extra commentary after the plan unless a field is
+    unknown. Account context: equity={account_equity}, risk_pct={risk_pct}.
+  expected_output: >
+    A YAML or JSON document matching the EMA / VWAP stack output schema.
+  agent: risk_scribe
+  output_file: output/stack_plan.yaml

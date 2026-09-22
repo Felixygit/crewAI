@@ -1,0 +1,35 @@
+[project]
+name = "ema_vwap_stack"
+version = "0.1.0"
+description = "CrewAI example: educational EMA / VWAP stack trade-plan agent"
+authors = [{ name = "CrewAI Example", email = "example@crewai.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
+
+[project.scripts]
+ema_vwap_stack = "ema_vwap_stack.main:run"
+run_crew = "ema_vwap_stack.main:run"
+run_plan = "ema_vwap_stack.main:run_screen"
+run_all_samples = "ema_vwap_stack.main:run_all_samples"
+plan_json = "ema_vwap_stack.main:plan_json"
+train = "ema_vwap_stack.main:train"
+replay = "ema_vwap_stack.main:replay"
+test = "ema_vwap_stack.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

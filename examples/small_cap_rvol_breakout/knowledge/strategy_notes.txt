@@ -1,0 +1,12 @@
+# Strategy cheat sheet for agent knowledge grounding
+
+Universe: small-cap equities under $20 with elevated relative volume and ATR%.
+
+Preferred setup: long break of the first 5-minute opening-range high, only when
+last price holds above VWAP and dollar volume / spread remain tradeable.
+
+Risk: fixed fractional stop under the OR high; scale 50% at 1.5R; runner to 3R;
+flatten on time stop or if price closes back inside the opening range.
+
+This project is for education and research automation with CrewAI. It is not
+personalized investment advice.

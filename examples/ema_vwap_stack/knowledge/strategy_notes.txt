@@ -1,0 +1,14 @@
+EMA / VWAP stack — leading words
+
+stack — ordered relationship of price, EMA 9, EMA 20, EMA 50 (and VWAP as session filter)
+regime — trend-up | trend-down | range | stand-aside
+confluence — two or more independent reasons at the same price (score 0–8, trade at >=4)
+pullback — dip into a rising/falling stack that still holds
+reclaim — price loses VWAP then closes back through it with the stack
+fvg — 3-candle imbalance; filter only when unfilled, same-side, and overlapping a stack line
+invalidation — the price that proves the setup wrong (stop belongs beyond it)
+stand-aside — no trade; the default
+
+Hard rules: one setup per ticker per window; do not chase >0.6% past the zone;
+lunch needs confluence >=5; never naked short options; never flip a long thesis into
+cheap far-OTM puts.
